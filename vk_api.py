@@ -1,10 +1,32 @@
 __author__ = 'GoForBroke'
 
+ORDER_ASC = 0
+ORDER_DESC = 1
+
+IMAGES_FIELD_NAMES = ['photo_2560', 'photo_1280', 'photo_807', 'photo_604', ]
+
 import json
 import urllib2
 
 vk_api_url = 'https://api.vk.com/method/'
 version = '5.45'
+
+
+def get_avatars_list(access_token, owner_id):
+    params = {'owner_id': owner_id, 'album_id': 'profile', 'rev': ORDER_DESC}
+    res = send(access_token, 'photos.get', params)
+    if not res.has_key('items'):
+        return False
+    items = res['items']
+    urls = []
+    for it in items:
+        for ifn in IMAGES_FIELD_NAMES:
+            if it.has_key(ifn):
+                max_size_img_url = it[ifn]
+                urls.append(max_size_img_url)
+                break
+
+    return urls
 
 
 def get_current_avatar_url(access_token, user_id):
