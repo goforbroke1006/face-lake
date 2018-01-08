@@ -14,7 +14,7 @@ def get_current_avatar_url(access_token, user_id):
 
 
 def get_friends(access_token, user_id):
-    params = {'user_ids': user_id, 'fields': 'photo_max_orig'}
+    params = {'user_id': user_id, 'fields': 'photo_max_orig'}
     response = send(access_token, 'friends.get', params)
     return response['items']
 
@@ -32,5 +32,10 @@ def send(access_token, method_name, params=()):
 
     res = urllib2.urlopen(request_url)
     raw_response = res.read().decode('utf-8')
-    api_response = json.loads(raw_response)['response']
+
+    json_data = json.loads(raw_response)
+    if not json_data.has_key('response'):
+        return dict()
+
+    api_response = json_data['response']
     return api_response
