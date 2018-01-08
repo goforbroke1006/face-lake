@@ -10,9 +10,7 @@ access_token = sys.argv[1]
 user_id = sys.argv[2]
 
 with open('face-lake.csv', 'w') as csv_file:
-    writer = csv.writer(
-        csv_file,
-        encoding='utf-8')
+    writer = csv.writer(csv_file, encoding='utf-8')
     writer.writerow(['id', 'shape'])
 
     friends = vk_api.get_friends(access_token, user_id)
