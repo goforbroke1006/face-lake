@@ -6,7 +6,7 @@ Face recognizing data collector.
 
 Get your code
 
-https://oauth.vk.com/authorize?client_id=123&v=5.45&display=popup&scope=friends,groups,offline,messages&response_type=code&redirect_uri=
+https://oauth.vk.com/authorize?client_id=123&v=5.45&display=popup&scope=friends,photos,offline&response_type=code&redirect_uri=
 
 Get token with code
 
