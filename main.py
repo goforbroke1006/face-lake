@@ -82,9 +82,10 @@ with open('face-lake-%s.csv' % user_id, 'w') as csv_file:
                 continue
             img = Image.open(tmp_image_path)
             w, h = img.size
-            img.crop((
-                pt["x"] * w,
-                pt["y"] * h,
-                (pt["x2"] - pt["x"]) / 100 * w,
-                (pt["y2"] - pt["y"]) / 100 * h
-            )).save(tmp_image_path)
+            px = pt["x"] / 100 * w
+            py = pt["y"] / 100 * h
+            pw = pt["x2"] / 100 * w
+            # pw = (pt["x2"] - pt["x"]) / 100 * w
+            ph = pt["y2"] / 100 * h
+            # ph = (pt["y2"] - pt["y"]) / 100 * h
+            img.crop((px, py, pw, ph)).save(tmp_image_path)
